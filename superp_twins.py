@@ -114,16 +114,5 @@ plot_polar(meansICME_ini.mean(axis=0), meansHSS_ini.mean(axis=0), "- Initial")
 plot_polar(meansICME_mai.mean(axis=0), meansHSS_mai.mean(axis=0), "- Main")
 plot_polar(meansICME_rec.mean(axis=0), meansHSS_rec.mean(axis=0), "- Recovery")
 
-# %%
 
-
-y_hss = meansHSS.mean(axis=0).values    # Replace with your actual HSS y values
-y_icme = meansICME.mean(axis=0).values     # Replace with your actual ICME y values
-
-
-
-
-# Show the plot
-ax.legend()
-plt.show()
 # %%
