@@ -116,3 +116,68 @@ plot_polar(meansICME_rec.mean(axis=0), meansHSS_rec.mean(axis=0), "- Recovery")
 
 
 # %%
+list_ICME = [meansICME.mean(axis=0), meansICME_ini.mean(axis=0), meansICME_mai.mean(axis=0), meansICME_rec.mean(axis=0)]
+list_HSS = [meansHSS.mean(axis=0), meansHSS_ini.mean(axis=0), meansHSS_mai.mean(axis=0), meansHSS_rec.mean(axis=0)]
+phases = ["", "- Initial", "- Main", "- Recovery"]
+
+
+figprops = dict(nrows=2, ncols=2,sharex=False,
+                    constrained_layout=False, 
+                    figsize=(10, 10), dpi=200,
+                    subplot_kw=dict(polar=True))
+
+fig, axs = plt.subplots(**figprops)
+axs = axs.flatten()
+letters = ['a)', 'b)', 'c)', 'd)']
+fig.subplots_adjust(hspace=-0.2)
+for ii in range(len(list_HSS)):
+
+    y_hss =list_HSS[ii].values    
+    y_icme = list_ICME[ii].values     
+    mlt_hours = np.concatenate((np.linspace(18, 24, len(y_hss) // 2, endpoint=False),
+                                np.linspace(0, 6, len(y_hss) // 2, endpoint=False)))
+
+    
+    angles = np.deg2rad(mlt_hours * 15)  # Convert MLT hours to degrees and then to radians
+
+    phase = phases[ii]
+
+
+    # Plot the data
+    axs[ii].plot(angles, y_hss, marker='o', linestyle='-', label='HSS')
+    axs[ii].plot(angles, y_icme, marker='x', linestyle='-', label='ICME')
+    axs[ii].set_theta_zero_location('S')
+    # Configure the plot to show only the 180�?360� portion
+    axs[ii].set_theta_direction(1)  # Clockwise
+    axs[ii].set_rlim(0,5.5, 1)
+    # ax.set_theta_offset(np.pi)  # Start at 180� (midnight)
+
+    # Set custom tick marks for MLT
+    custom_ticks = [18, 20, 22, 0, 2, 4, 6]  # MLT labels
+    custom_tick_angles = np.deg2rad([-90, -60, -30, 0, 30, 60, 90])  # Convert MLT to radians
+    axs[ii].set_xticks(custom_tick_angles)
+    axs[ii].set_xticklabels(custom_ticks)
+    # ax.set_rlabel_position(5)  # Move grid labels away from other labels
+    axs[ii].set_thetamin(90) # only show top half
+    axs[ii].set_thetamax(-90)
+    axs[ii].legend(loc='lower center', bbox_to_anchor=(0.5, 0.026), ncol=2)
+    axs[ii].text(0.5, 0.9, f"Mean TWINS Ion Temperature \n for HSS and ICME {phase}", 
+            horizontalalignment='center', 
+            verticalalignment='center', 
+            size='large',
+            transform=axs[ii].transAxes)
+    axs[ii].text(0.5, 0.14, f"MLT", 
+            horizontalalignment='center', 
+            verticalalignment='center', 
+            size='medium',
+            transform=axs[ii].transAxes)
+    axs[ii].text(-0.1, 0.9, f"{letters[ii]}", 
+            horizontalalignment='center', 
+            verticalalignment='center', 
+            size='large',
+            transform=axs[ii].transAxes)
+
+plt.savefig(f'figures/mean_density_ICME_HSS.png', dpi=300, bbox_inches='tight')
+
+# ax.set_title()
+# %%
