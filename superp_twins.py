@@ -34,7 +34,7 @@ hss_ini = data_HSS[data_HSS['phase'] == 'ini']
 hss_mai = data_HSS[data_HSS['phase'] == 'main']
 hss_rec = data_HSS[data_HSS['phase'] == 'rec']
 # %%
-key= twins_storms['datetime'].values[1]
+key= data_HSS['datetime'].values[10]
 window_img_mean, window_selected_sections = mlt_wedge(window_maps[key]['map'], mlt_min=3, mlt_max=4, center_x=window_maps[key]['map'].shape[1], center_y=int(window_maps[key]['map'].shape[0]/2))
 fig, ax = plt.subplots(1, 3, figsize=(20, 15))
 vmin = np.nanmin(window_maps[key]['map'])
