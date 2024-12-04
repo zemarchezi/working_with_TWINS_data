@@ -33,16 +33,16 @@ data_HSS = twins_storms[maskStruc]
 hss_ini = data_HSS[data_HSS['phase'] == 'ini']
 hss_mai = data_HSS[data_HSS['phase'] == 'main']
 hss_rec = data_HSS[data_HSS['phase'] == 'rec']
-# # %%
-# key= data_HSS['datetime'].values[10]
-# window_img_mean, window_selected_sections = mlt_wedge(window_maps[key]['map'], mlt_min=5, mlt_max=6, center_x=window_maps[key]['map'].shape[1], center_y=int(window_maps[key]['map'].shape[0]/2))
-# fig, ax = plt.subplots(1, 3, figsize=(20, 15))
-# vmin = np.nanmin(window_maps[key]['map'])
-# vmax = np.nanmax(window_maps[key]['map'])
-# ax[0].imshow(window_maps[key]['map'], cmap='viridis', vmin=vmin, vmax=vmax, origin='lower')
-# ax[0].axhline(y=int(window_maps[key]['map'].shape[0]/2), color='r', linestyle='--')
-# ax[1].imshow(window_selected_sections, cmap='viridis', vmin=vmin, vmax=vmax, origin='lower')
-# ax[2].imshow(window_maps[key]['map'][35:125,50:110], cmap='viridis', vmin=vmin, vmax=vmax, origin='lower')
+# %%
+key= twins_storms['datetime'].values[1]
+window_img_mean, window_selected_sections = mlt_wedge(window_maps[key]['map'], mlt_min=3, mlt_max=4, center_x=window_maps[key]['map'].shape[1], center_y=int(window_maps[key]['map'].shape[0]/2))
+fig, ax = plt.subplots(1, 3, figsize=(20, 15))
+vmin = np.nanmin(window_maps[key]['map'])
+vmax = np.nanmax(window_maps[key]['map'])
+ax[0].imshow(window_maps[key]['map'], cmap='viridis', vmin=vmin, vmax=vmax, origin='lower')
+ax[0].axhline(y=int(window_maps[key]['map'].shape[0]/2), color='r', linestyle='--')
+ax[1].imshow(window_selected_sections, cmap='viridis', vmin=vmin, vmax=vmax, origin='lower')
+ax[2].imshow(window_maps[key]['map'][35:125,50:110], cmap='viridis', vmin=vmin, vmax=vmax, origin='lower')
 # %%
 
 

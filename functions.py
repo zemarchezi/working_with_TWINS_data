@@ -10,7 +10,7 @@ from spacepy import pycdf
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-twins_dir = '/home/jmarchezi/python_projects/read_twins_data/data/twins/'
+twins_dir = '/home/jmarchezi/python_projects/working_with_TWINS_data/data/twins/'
 #%%
 def loading_twins_maps(full_map=False):
 	'''
@@ -87,7 +87,7 @@ def mlt_wedge(img_data, mlt_min: int = 18, mlt_max: int = 6, center_x: int = 120
     start_angle = (mlt_min*15) % 360
     end_angle = (mlt_max*15) % 360
 
-    # print(f'start_angle: {start_angle}, end_angle: {end_angle}')
+    print(f'start_angle: {start_angle}, end_angle: {end_angle}')
     # Calculate the coordinates of the sector arc
     for y in range(height):
         for x in range(width):
@@ -112,7 +112,7 @@ def mlt_wedge(img_data, mlt_min: int = 18, mlt_max: int = 6, center_x: int = 120
     xx[xx == 0] = np.nan
     # Get the mean of the non zero values of the image
     img_mean.append(np.nanmean(xx))
-    # print(f'mean: {np.nanmean(xx)}')
+    print(f'mean: {np.nanmean(xx)}')
     return img_mean, selected_sections
 # %%
 
